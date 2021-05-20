@@ -22,7 +22,7 @@
       </div>
         <div class="form-group">
           <label for="Receiver Address">Receiver ETH Address</label>
-          <input value="0x2932b7A2355D6fecc4b5c0B6BD44cC31df247a2e" type="text" class="form-control" id="toAddress" aria-describedby="toAddressHelp" placeholder="Enter the receipient address" required="true">
+          <input value="0xcc9a8e085be601c3949513117dfc4855151dca69" type="text" class="form-control" id="toAddress" aria-describedby="toAddressHelp" placeholder="Enter the receipient address" required="true">
           <small id="toAddressHelp" class="form-text text-muted">Enter the wallet address of the recipient.</small>
         </div>
           <div class="form-group">
@@ -60,7 +60,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
     <script>
-    var contractAddress = '0xA70c9f56c5c6dEA16038bF260970eFE8B0E4DBDa';
+    var contractAddress = '0x3daef41f21bfc475796d42b758f9fce9d181754c';
     if ( typeof web3 != 'undefined') {
       web3 = new Web3(web3.currentProvider);
     } else {
@@ -119,6 +119,35 @@
         });
     });
 
+    $('#approve-form').submit(function() {
+      event.preventDefault();
+
+      ApprovalContract.methods.approve().call({from: '0xA70c9f56c5c6dEA16038bF260970eFE8B0E4DBDa', gas: 100000},
+          function(error, result) {
+            if (error) {
+              console.log('error: ' + error);
+            }
+            else {
+              console.log('result: ' + JSON.stringify(result));
+              $('#approval-display').html('Transaction Approved. TX: <b>' + result + '</b>');
+            }
+          });
+    });
+    $('#approver-form').submit(function() {
+      event.preventDefault();
+
+      ApprovalContract.methods.viewApprover().call(
+          function(error, result) {
+            if (error) {
+              console.log('error: ' + error);
+            }
+            else {
+              console.log('result: ' + JSON.stringify(result));
+              $('#approver-display').html('Approver Address: <b>' + result + '</b>');
+            }
+          });
+    });
+	
     </script>
 
     </body>
