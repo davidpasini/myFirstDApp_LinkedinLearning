@@ -1,2 +1,2 @@
 # myFirstDApp_LinkedinLearning
-Smart Contract + DApp exercise from Linkedin Learning course
+Solidity Smart Contract + DApp exercise for local EVM from Linkedin Learning course
